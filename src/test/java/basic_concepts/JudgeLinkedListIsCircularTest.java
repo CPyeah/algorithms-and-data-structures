@@ -16,6 +16,14 @@ public class JudgeLinkedListIsCircularTest {
 		Assert.assertFalse(judgeLinkedListIsCircular.solution1(head2));
 	}
 
+	@Test
+	public void solution2() {
+		ListNode head1 = getLinkedList1();
+		Assert.assertTrue(judgeLinkedListIsCircular.solution2(head1));
+		ListNode head2 = getLinkedList2();
+		Assert.assertFalse(judgeLinkedListIsCircular.solution2(head2));
+	}
+
 	private ListNode getLinkedList1() {
 		ListNode node1 = new ListNode(1);
 		ListNode node2 = new ListNode(2);

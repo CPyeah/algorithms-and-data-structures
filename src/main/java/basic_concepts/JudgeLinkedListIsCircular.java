@@ -1,5 +1,7 @@
 package basic_concepts;
 
+import java.util.HashSet;
+import java.util.Set;
 import model.ListNode;
 
 public class JudgeLinkedListIsCircular {
@@ -27,6 +29,20 @@ public class JudgeLinkedListIsCircular {
 				return true;
 			}
 		}
+	}
+
+	// by hash
+	public boolean solution2(ListNode head) {
+		Set<ListNode> set = new HashSet<>();
+		ListNode index = head;
+		while (index != null) {
+			if (set.add(index)) {
+				index = index.next;
+			} else {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
