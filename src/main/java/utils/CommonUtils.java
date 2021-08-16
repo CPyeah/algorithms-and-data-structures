@@ -5,7 +5,6 @@ import java.util.Deque;
 import java.util.List;
 import java.util.Random;
 import model.ListNode;
-import sun.jvm.hotspot.utilities.Interval;
 
 public class CommonUtils {
 
@@ -237,13 +236,6 @@ public class CommonUtils {
 			}
 			System.out.println();
 		}
-	}
-
-	public static void printIntervals(List<Interval> intervals) {
-		for (Interval interval : intervals) {
-			System.out.print("[" + interval.getLowEndpoint() + ", " + interval.getHighEndpoint() + "], ");
-		}
-		System.out.println();
 	}
 
 	public static void printArrayArray(int[][] arrayArrays) {
