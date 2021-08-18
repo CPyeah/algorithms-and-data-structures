@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class FactorialTest {
 
-	private static Factorial factorial = new Factorial();
+	private final Factorial factorial = new Factorial();
 
 	@Test
 	public void solution1() {
