@@ -1,7 +1,5 @@
 package basic_concepts;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,8 +9,11 @@ public class ClimbingStairsTest {
 
 	/**
 	 * n = 2;   1 1  /  2   -> 2
+	 * <p>
 	 * n = 3;   1 1 1 / 1 2 / 2 1  -> 3
+	 * <p>
 	 * n = 4;   1 1 1 1 / 1 1 2 / 1 2 1 / 2 1 1 / 2 2  -> 5
+	 * <p>
 	 * ......
 	 */
 	@Test
