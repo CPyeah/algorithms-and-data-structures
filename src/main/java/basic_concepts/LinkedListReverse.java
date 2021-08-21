@@ -1,8 +1,5 @@
 package basic_concepts;
 
-import com.google.common.collect.Lists;
-import com.sun.tools.doclets.internal.toolkit.util.links.LinkInfo;
-import java.util.Arrays;
 import model.ListNode;
 
 public class LinkedListReverse {
