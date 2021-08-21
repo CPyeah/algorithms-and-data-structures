@@ -1,7 +1,5 @@
 package basic_concepts;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,7 +16,57 @@ public class FibonacciTest {
 	}
 
 	@Test
+	public void solution2() {
+//		Assert.assertEquals(1, fibonacci.solution2(1));
+//		Assert.assertEquals(2, fibonacci.solution2(3));
+//		Assert.assertEquals(5, fibonacci.solution2(5));
+		Assert.assertEquals(34, fibonacci.solution2(9));
+	}
+
+	@Test
 	public void printFibonacci() {
 		fibonacci.printFibonacciArray(10);
 	}
+
+	/**
+	 * 1
+	 * 1
+	 *
+	 * 1
+	 * 1
+	 *
+	 * 3
+	 * 3
+	 *
+	 * 5
+	 * 4
+	 *
+	 * 9
+	 * 5
+	 *
+	 * 15
+	 * 6
+	 *
+	 * 25
+	 * 7
+	 *
+	 * 41
+	 * 8
+	 *
+	 * 67
+	 * 9
+	 *
+	 * 109
+	 * 10
+	 */
+	@Test
+	public void checkTimeComplexity() {
+		for (int i = 1; i <= 10; i++) {
+			fibonacci.solution(i);
+			fibonacci.solution2(i);
+			System.out.println();
+		}
+	}
+
+
 }
