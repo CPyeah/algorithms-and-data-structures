@@ -1,5 +1,8 @@
 package basic_concepts;
 
+import com.google.common.collect.Lists;
+import com.sun.tools.doclets.internal.toolkit.util.links.LinkInfo;
+import java.util.Arrays;
 import model.ListNode;
 
 public class LinkedListReverse {
@@ -17,6 +20,22 @@ public class LinkedListReverse {
 			if (right == null) {
 				mid.next = left;
 				break;
+			}
+		}
+		return mid;
+	}
+
+	public ListNode solution1(ListNode head) {
+		ListNode left = null;
+		ListNode mid = head;
+		ListNode right = head.next;
+		while (right != null) {
+			mid.next = left;
+			left = mid;
+			mid = right;
+			right = right.next;
+			if (right == null) {
+				mid.next = left;
 			}
 		}
 		return mid;

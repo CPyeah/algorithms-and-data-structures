@@ -17,6 +17,14 @@ public class LinkedListReverseTest {
 		System.out.println(newList);
 	}
 
+	@Test
+	public void solution1() {
+		ListNode listNode1 = getListNode1();
+		System.out.println(listNode1);
+		ListNode newList = linkedListReverse.solution1(listNode1);
+		System.out.println(newList);
+	}
+
 	private ListNode getListNode1() {
 		ListNode node1 = new ListNode(1);
 		ListNode node2 = new ListNode(2);

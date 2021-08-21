@@ -1,6 +1,7 @@
 package basic_concepts;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class FibonacciTest {
@@ -60,6 +61,7 @@ public class FibonacciTest {
 	 * 10
 	 */
 	@Test
+	@Ignore
 	public void checkTimeComplexity() {
 		for (int i = 1; i <= 10; i++) {
 			fibonacci.solution(i);
