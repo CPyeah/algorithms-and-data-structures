@@ -7,14 +7,12 @@ import excel.model.InterruptionOfBVirus;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 模板的读取类
  *
  * @author Jiaju Zhuang
  */
-@Slf4j
 public class InterruptionOfBVirusListener extends
 		AnalysisEventListener<InterruptionOfBVirus> {
 
@@ -67,14 +65,10 @@ public class InterruptionOfBVirusListener extends
 	 */
 	@Override
 	public void onException(Exception exception, AnalysisContext context) {
-		log.error("解析失败，但是继续解析下一行:{}", exception.getMessage());
 		// 如果是某一个单元格的转换异常 能获取到具体行号
 		// 如果要获取头的信息 配合invokeHeadMap使用
 		if (exception instanceof ExcelDataConvertException) {
-			ExcelDataConvertException excelDataConvertException = (ExcelDataConvertException) exception;
-			log.error("第{}行，第{}列解析异常，数据为:{}", excelDataConvertException.getRowIndex(),
-					excelDataConvertException.getColumnIndex(),
-					excelDataConvertException.getCellData());
+
 		}
 	}
 }
