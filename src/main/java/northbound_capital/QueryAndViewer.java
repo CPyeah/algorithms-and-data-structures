@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JPanel;
+import lombok.Setter;
 import model.StockData;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +26,8 @@ import repository.StockDataRepository;
 public class QueryAndViewer extends ApplicationFrame {
 
 	StockDataRepository repository;
+
+	@Setter
 	List<String> codes;
 
 	QueryAndViewer(StockDataRepository repository, List<String> codes) {
@@ -56,7 +59,7 @@ public class QueryAndViewer extends ApplicationFrame {
 		plot.setBackgroundPaint(Color.LIGHT_GRAY);
 		plot.setDomainGridlinePaint(Color.WHITE);
 		plot.setRangeGridlinePaint(Color.WHITE);
-		plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
+		plot.setAxisOffset(new RectangleInsets(1.0, 1.0, 1.0, 1.0));
 		plot.setDomainCrosshairVisible(true);
 		plot.setRangeCrosshairVisible(true);
 

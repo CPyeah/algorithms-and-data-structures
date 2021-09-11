@@ -3,6 +3,10 @@ package northbound_capital;
 import java.util.Arrays;
 import java.util.List;
 import model.StockData;
+import northbound_capital.stocks.MyOptionalStock;
+import northbound_capital.stocks.NewEnergyVehicleStock;
+import northbound_capital.stocks.NewbornBabyStock;
+import northbound_capital.stocks.SemiconductorStock;
 import org.jfree.chart.ui.UIUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,10 +40,35 @@ public class QueryAndViewerTest {
 	}
 
 	@Test
-	public void viewTest() throws InterruptedException {
-		queryAndViewer.pack();
-		UIUtils.centerFrameOnScreen(queryAndViewer);
-		queryAndViewer.setVisible(true);
+	public void viewMyOptionalStockTest() throws InterruptedException {
+		List<String> codes = MyOptionalStock.getCodes();
+		viewThisStocks(codes);
+	}
+
+	@Test
+	public void viewNewEnergyVehicleStockTest() throws InterruptedException {
+		List<String> codes = NewEnergyVehicleStock.getCodes();
+		viewThisStocks(codes);
+	}
+
+	@Test
+	public void viewSemiconductorStockTest() throws InterruptedException {
+		List<String> codes = SemiconductorStock.getCodes();
+		viewThisStocks(codes);
+	}
+
+	@Test
+	public void viewNewbornBabyStockTest() throws InterruptedException {
+		List<String> codes = NewbornBabyStock.getCodes();
+		viewThisStocks(codes);
+	}
+
+	private void viewThisStocks(List<String> codes) throws InterruptedException {
+		QueryAndViewer myOptionView = new QueryAndViewer(repository, codes);
+		myOptionView.setCodes(codes);
+		myOptionView.pack();
+		UIUtils.centerFrameOnScreen(myOptionView);
+		myOptionView.setVisible(true);
 //		Thread.sleep(1000 * 60 * 5);
 	}
 }
