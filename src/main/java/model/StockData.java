@@ -7,12 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.Table;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "stock_data")
+@Table(name = "stock_data", indexes = {
+		@Index(name = "stock_code_date_index", columnList = "security_code,trade_date"),
+		@Index(name = "trade_date_index", columnList = "trade_date")
+})
 public class StockData {
 
 	@Id
@@ -102,7 +106,7 @@ public class StockData {
 	private double HOLD_MARKETCAP_CHG5;
 	@Column
 	private String ORIG_AREA_CODE;
-	@Column
+	@Column(columnDefinition = " varchar(1024)")
 	private String CONCEPT_CODE;
 	@Column
 	private double HOLD_MARKETCAP_CHG1;

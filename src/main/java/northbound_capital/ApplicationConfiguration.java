@@ -2,12 +2,11 @@ package northbound_capital;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import org.h2.jdbcx.JdbcDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -21,9 +20,14 @@ public class ApplicationConfiguration {
 
 	@Bean
 	public DataSource dataSource() {
-		return new EmbeddedDatabaseBuilder()
-				.setType(EmbeddedDatabaseType.H2)
-				.build();
+		JdbcDataSource jdbcDataSource = new JdbcDataSource();
+		jdbcDataSource.setUrl("jdbc:h2:file:./src/main/resources/stocks;AUTO_SERVER=TRUE");
+		jdbcDataSource.setUser("root");
+		jdbcDataSource.setPassword("root");
+		return jdbcDataSource;
+//		return new EmbeddedDatabaseBuilder()
+//				.setType(EmbeddedDatabaseType.H2)
+//				.build();
 	}
 
 	@Bean

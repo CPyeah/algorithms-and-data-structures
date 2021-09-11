@@ -3,17 +3,28 @@ package northbound_capital;
 import com.alibaba.fastjson.JSONObject;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import lombok.NoArgsConstructor;
 import model.StockData;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import repository.StockDataRepository;
 
+@NoArgsConstructor
 public class Crawler {
+	StockDataRepository repository;
+
+	Crawler(StockDataRepository repository) {
+		this.repository = repository;
+	}
 
 	String url = "http://datacenter-web.eastmoney.com/api/data/v1/get?"
 			+ "callback=jQuery112305161251472939605_1631166897189"
@@ -54,8 +65,7 @@ public class Crawler {
 		if (CollectionUtils.isEmpty(stockDataList)) {
 			return;
 		}
-		stockDataList.forEach(
-				s -> System.out.println(s.toString()));
+		repository.save(stockDataList);
 	}
 
 	private List<StockData> queryByHttp(String dateString, int pageNo, int pageSize,
@@ -96,8 +106,12 @@ public class Crawler {
 	}
 
 	private LocalDate[] getCrawlingTime() {
-		return new LocalDate[]{LocalDate.of(2021, 9, 8),
-				LocalDate.of(2021, 9, 9)};
+		Date begin = repository.findLastDate();
+		if (begin == null) {
+			begin = DateUtils.addMonths(new Date(), -1);
+		}
+		LocalDate b = begin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		return new LocalDate[]{b, LocalDate.now()};
 	}
 
 }
