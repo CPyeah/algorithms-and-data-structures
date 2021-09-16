@@ -17,6 +17,7 @@ import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.ui.ApplicationFrame;
 import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.ui.UIUtils;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -27,16 +28,26 @@ public class QueryAndViewer extends ApplicationFrame {
 
 	StockDataRepository repository;
 
+	String title;
+
 	@Setter
 	List<String> codes;
 
-	QueryAndViewer(StockDataRepository repository, List<String> codes) {
+	QueryAndViewer(StockDataRepository repository, List<String> codes, String title) {
 		super("Northbound_Capital");
 		this.repository = repository;
 		this.codes = codes;
+		this.title = title;
+	}
+
+	public void view() {
 		ChartPanel chartPanel = (ChartPanel) createDemoPanel();
 		chartPanel.setPreferredSize(new java.awt.Dimension(1224, 720));
 		setContentPane(chartPanel);
+		pack();
+		UIUtils.centerFrameOnScreen(this);
+		this.setVisible(true);
+
 	}
 
 	/**
@@ -48,7 +59,7 @@ public class QueryAndViewer extends ApplicationFrame {
 	private JFreeChart createChart(XYDataset dataset) {
 
 		JFreeChart chart = ChartFactory.createTimeSeriesChart(
-				"北向资金概况",  // title
+				title,  // title
 				"日期",             // x-axis label
 				"今日增持市值（万）",   // y-axis label
 				dataset);
@@ -113,7 +124,7 @@ public class QueryAndViewer extends ApplicationFrame {
 			if (CollectionUtils.isNotEmpty(stockDataList)) {
 				TimeSeries s = new TimeSeries(stockDataList.get(0).getSECURITY_NAME());
 				stockDataList.forEach(stockData -> {
-					s.add(new Day(stockData.getTRADE_DATE()), stockData.getADD_MARKET_CAP());
+					s.addOrUpdate(new Day(stockData.getTRADE_DATE()), stockData.getADD_MARKET_CAP());
 				});
 				dataset.addSeries(s);
 			}

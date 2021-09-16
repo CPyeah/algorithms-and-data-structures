@@ -16,6 +16,8 @@ import org.springframework.core.annotation.Order;
 public enum NewbornBabyStock {
 
 	美吉姆("002621"),
+	康芝药业("300086"),
+	凯普生物("300639"),
 	戴维医疗("300314"),
 	金发拉比("002762"),
 	爱婴室("603214"),

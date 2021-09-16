@@ -150,4 +150,6 @@ public class StockData {
 				", " + sdf.format(TRADE_DATE) +
 				'}';
 	}
+
+
 }

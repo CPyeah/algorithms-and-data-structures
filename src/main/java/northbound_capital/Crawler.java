@@ -108,7 +108,7 @@ public class Crawler {
 	private LocalDate[] getCrawlingTime() {
 		Date begin = repository.findLastDate();
 		if (begin == null) {
-			begin = DateUtils.addMonths(new Date(), -1);
+			begin = DateUtils.addMonths(new Date(), -3);
 		}
 		LocalDate b = begin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		return new LocalDate[]{b, LocalDate.now()};

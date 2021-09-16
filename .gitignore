@@ -5,3 +5,4 @@ db_data/
 *.idea
 .docker
 /src/main/resources/excels
+/src/main/resources/stocks.mv.db
