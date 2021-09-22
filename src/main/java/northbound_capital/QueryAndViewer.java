@@ -33,12 +33,17 @@ public class QueryAndViewer extends ApplicationFrame {
 	@Setter
 	List<String> codes;
 
-	QueryAndViewer(StockDataRepository repository, List<String> codes, String title) {
+	String beginTime;
+
+	QueryAndViewer(StockDataRepository repository, List<String> codes, String title,
+			String beginTime) {
 		super("Northbound_Capital");
 		this.repository = repository;
 		this.codes = codes;
 		this.title = title;
+		this.beginTime = beginTime;
 	}
+
 
 	public void view() {
 		ChartPanel chartPanel = (ChartPanel) createDemoPanel();
@@ -120,7 +125,12 @@ public class QueryAndViewer extends ApplicationFrame {
 			if (StringUtils.isBlank(code)) {
 				return;
 			}
-			List<StockData> stockDataList = repository.findBySECURITY_CODE(code);
+			List<StockData> stockDataList;
+			if (StringUtils.isBlank(beginTime)) {
+				 stockDataList = repository.findBySECURITY_CODE(code);
+			} else {
+				stockDataList = repository.findByCodeBeforeTime(code, beginTime);
+			}
 			if (CollectionUtils.isNotEmpty(stockDataList)) {
 				TimeSeries s = new TimeSeries(stockDataList.get(0).getSECURITY_NAME());
 				stockDataList.forEach(stockData -> {

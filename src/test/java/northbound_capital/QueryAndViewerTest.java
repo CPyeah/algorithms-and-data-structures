@@ -1,6 +1,7 @@
 package northbound_capital;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.StockData;
@@ -27,41 +28,50 @@ public class QueryAndViewerTest {
 	@Autowired
 	private StockDataRepository repository;
 
+	String beginTime = null;
+
 	@Test
-	public void queryOneStockInfo() {
+	public void queryOneStockInfo() throws InterruptedException {
+		String beginTime = "2021-09-01";
 		String code = "000333";
-		QueryAndViewer queryAndViewer = new QueryAndViewer(repository, null, code + " 北向资金情况");
+		QueryAndViewer queryAndViewer = new QueryAndViewer(repository,
+				Collections.singletonList(code), code + " 北向资金情况", beginTime);
 		List<StockData> stockDataList = queryAndViewer.queryOneStockInfo(code);
 		stockDataList.forEach(System.out::println);
+		queryAndViewer.view();
+		Thread.sleep(1000 * 60 * 5);
 	}
 
 
 	@Test
 	public void viewMyOptionalStockTest() throws InterruptedException {
+		String beginTime = "2021-09-01";
 		List<String> codes = MyOptionalStock.getCodes();
-		viewThisStocks(codes, "我的自选股");
+		viewThisStocks(codes, "我的自选股", null);
 	}
 
 	@Test
 	public void viewNewEnergyVehicleStockTest() throws InterruptedException {
+		String beginTime = "2021-09-01";
 		List<String> codes = NewEnergyVehicleStock.getCodes();
-		viewThisStocks(codes, "新能源汽车");
+		viewThisStocks(codes, "新能源汽车", null);
 	}
 
 	@Test
 	public void viewSemiconductorStockTest() throws InterruptedException {
+		String beginTime = "2021-09-01";
 		List<String> codes = SemiconductorStock.getCodes();
-		viewThisStocks(codes, "半导体");
+		viewThisStocks(codes, "半导体", null);
 	}
 
 	@Test
 	public void viewNewbornBabyStockTest() throws InterruptedException {
 		List<String> codes = NewbornBabyStock.getCodes();
-		viewThisStocks(codes, "新生儿");
+		viewThisStocks(codes, "新生儿", null);
 	}
 
-	private void viewThisStocks(List<String> codes, String title) throws InterruptedException {
-		QueryAndViewer myOptionView = new QueryAndViewer(repository, codes, title);
+	private void viewThisStocks(List<String> codes, String title, String beginTime) throws InterruptedException {
+		QueryAndViewer myOptionView = new QueryAndViewer(repository, codes, title, beginTime);
 		myOptionView.view();
 //		Thread.sleep(1000 * 60 * 5);
 	}
@@ -69,33 +79,39 @@ public class QueryAndViewerTest {
 	@Test
 	public void proportionOfPositiveFlowTest() throws InterruptedException {
 		int top = 5;
-		List<StockCount> stockCountList = repository.positiveInflowDaysTop(top);
+		String beginTime = "2021-08-15";
+		List<StockCount> stockCountList = repository.positiveInflowDaysTop(top, beginTime);
 		System.out.println(Arrays.toString(stockCountList.toArray()));
 		List<String> codes = stockCountList.stream().map(StockCount::getCode)
 				.collect(Collectors.toList());
-		viewThisStocks(codes, "正流向天数 Top" + top);
+		viewThisStocks(codes, "正流向天数 Top" + top, beginTime);
 	}
 
 	@Test
 	public void totalInflowTopTest() throws InterruptedException {
 		int top = 5;
-		List<StockSum> stockSumList = repository.totalInflowTop(top);
+		String beginTime = "2021-09-01";
+		List<StockSum> stockSumList = repository.totalInflowTop(top, beginTime);
 		stockSumList.forEach(System.out::println);
 		List<String> codes = stockSumList.stream().map(StockSum::getCode)
 				.collect(Collectors.toList());
-		viewThisStocks(codes, "总流入资金 Top" + top);
+		viewThisStocks(codes, "总流入资金 Top" + top, beginTime);
 	}
 
 	@Test
 	public void daysAndTotalComprehensiveTest() throws InterruptedException {
-		int top = 10;
-		List<StockSum> stockSumList = repository.totalInflowTop(top);
-		List<StockCount> stockCountList = repository.positiveInflowDaysTop(top);
+		int top = 15;
+		String beginTime = "2021-08-15";
+		List<StockSum> stockSumList = repository.totalInflowTop(top, beginTime);
+		List<StockCount> stockCountList = repository.positiveInflowDaysTop(top, beginTime);
+		System.out.println(stockSumList);
+		System.out.println(stockCountList);
 		List<String> sumCode = stockSumList.stream().map(StockSum::getCode)
 				.collect(Collectors.toList());
 		List<String> countCode = stockCountList.stream().map(StockCount::getCode)
 				.collect(Collectors.toList());
 		sumCode.retainAll(countCode);
-		viewThisStocks(sumCode, "正流向天数 & 总流入资金");
+		System.out.println(sumCode);
+		viewThisStocks(sumCode, "正流向天数 & 总流入资金", beginTime);
 	}
 }

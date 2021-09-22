@@ -110,6 +110,7 @@ public class Crawler {
 		if (begin == null) {
 			begin = DateUtils.addMonths(new Date(), -3);
 		}
+		begin = DateUtils.addDays(begin, 1);
 		LocalDate b = begin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		return new LocalDate[]{b, LocalDate.now()};
 	}
