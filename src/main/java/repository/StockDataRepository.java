@@ -28,10 +28,20 @@ public interface StockDataRepository extends JpaRepository<StockData, Long>,
 			+ "group by SECURITY_CODE order by count desc limit ?1", nativeQuery = true)
 	List<StockCount> positiveInflowDaysTop(int top, String beginTime);
 
+	@Query(value = "select SECURITY_CODE as code, count(*) as count from "
+			+ " stock_data where ADD_MARKET_CAP > 0 and TRADE_DATE > ?2 and CLOSE_PRICE < ?3 "
+			+ " group by SECURITY_CODE order by count desc limit ?1", nativeQuery = true)
+	List<StockCount> positiveInflowDaysTopLimitPrice(int top, String beginTime, BigDecimal price);
+
 	@Query(value = "select SECURITY_CODE as code, sum(ADD_MARKET_CAP) as sum from "
 			+ " stock_data where TRADE_DATE > ?2 "
-			+ "group by SECURITY_CODE order by sum desc limit ?1", nativeQuery = true)
+			+ " group by SECURITY_CODE order by sum desc limit ?1", nativeQuery = true)
 	List<StockSum> totalInflowTop(int top, String beginTime);
+
+	@Query(value = "select SECURITY_CODE as code, sum(ADD_MARKET_CAP) as sum from "
+			+ " stock_data where TRADE_DATE > ?2 and CLOSE_PRICE < ?3 "
+			+ " group by SECURITY_CODE order by sum desc limit ?1", nativeQuery = true)
+	List<StockSum> totalInflowTopLimitPrice(int top, String beginTime, BigDecimal price);
 
 	interface StockCount {
 		String getCode();

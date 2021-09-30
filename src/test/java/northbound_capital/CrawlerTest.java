@@ -24,7 +24,7 @@ public class CrawlerTest {
 	@Test
 	public void crawling() {
 		Crawler crawler = new Crawler(repository);
-		crawler.crawling();
+//		crawler.crawling();
 	}
 
 	@Test

@@ -22,6 +22,7 @@ public enum MyOptionalStock {
 	中芯国际("688981"),
 	黄山旅游("600054"),
 	恒顺醋业("600305"),
+	贵州茅台("600519"),
 	;
 
 	private final String code;
