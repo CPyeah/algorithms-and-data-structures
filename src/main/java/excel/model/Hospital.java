@@ -113,4 +113,30 @@ public enum Hospital {
 	public void setSimilar(float similar) {
 		this.similar = similar;
 	}
+
+	public String getSimpleName() {
+		String name = this.name();
+		if (name.contains("医院")) {
+			return name.replace("医院", "");
+		}
+		if (name.contains("保健院")) {
+			return name.replace("保健院", "");
+		}
+		return name;
+	}
+
+	public static Hospital findByName(String name) {
+		for (Hospital hospital : Hospital.values()) {
+			String simpleName = hospital.getSimpleName();
+			if (name.contains(simpleName)) {
+				return hospital;
+			}
+		}
+		return 不知道_需要手动看;
+	}
+
+	public static void main(String[] args) {
+		Hospital byName = Hospital.findByName("镇江市妇幼保健院.xls");
+		System.out.println(byName);
+	}
 }

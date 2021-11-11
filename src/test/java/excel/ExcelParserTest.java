@@ -15,7 +15,7 @@ public class ExcelParserTest extends TestCase {
 
 	public void testGetMostSimilarHospital() {
 		Hospital mostSimilarHospital = excelParser
-				.getMostSimilarHospital("2021 (南京市高淳人民院");
+				.getMostSimilarHospital("高淳县人民医院");
 		System.out.println(mostSimilarHospital.name());
 	}
 }

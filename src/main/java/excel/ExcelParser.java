@@ -30,11 +30,10 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.formula.functions.T;
 
 public class ExcelParser {
 
-	public static final String month = "5";
+	public static final String month = "9";
 
 	public static void main(String[] args) {
 		String basePath = "src/main/resources/excels/" + month + "/";
@@ -49,13 +48,16 @@ public class ExcelParser {
 		List<AllInfo> allInfos = Arrays.stream(list)
 				.map(e -> readFile(basePath + e))
 				.collect(Collectors.toList());
-		sanxiangAndhuguan(allInfos);
+		merge2HospitalUnit(allInfos);
 		fillHospitalName(allInfos);
 		List<AllInfo> sorted = sortAndFillBlank(allInfos);
 		print(sorted);
 		long count = sorted.stream().filter(s -> StringUtils.isNotBlank(s.getFileName())).count();
 		System.out.println("table files has " + count);
 		exportExcel(sorted);
+	}
+
+	private static void merge2HospitalUnit(List<AllInfo> allInfos) {
 	}
 
 	private static void print(List<AllInfo> sorted) {
@@ -99,7 +101,12 @@ public class ExcelParser {
 			if (StringUtils.isBlank(info.getHospitalName())) {
 				info.setHospitalName(getHospitalNameByFileName(info.getFileName()));
 			}
-			Hospital hospital = getMostSimilarHospital(info.getHospitalName());
+//			Hospital hospital = getMostSimilarHospital(info.getHospitalName());
+			Hospital hospital = Hospital.findByName(info.getHospitalName());
+			if (hospital.equals(不知道_需要手动看)) {
+				hospital = Hospital.findByName(info.getFileName());
+//				hospital = getMostSimilarHospital(info.getFileName());
+			}
 			info.setHospital(hospital);
 		});
 	}
@@ -108,9 +115,9 @@ public class ExcelParser {
 		float most = 0;
 		Hospital hospital = 不知道_需要手动看;
 		for (Hospital h : Hospital.values()) {
-			float similarityRatio = Utils.getSimilarityRatio(h.name(), hospitalName);
+			float similarityRatio = Utils.getSimilarityRatio(h.getSimpleName(), hospitalName);
 //			System.out.println(h.name() + ":" + hospitalName + "-->" + similarityRatio);
-			if (similarityRatio > 30 && similarityRatio > most) {
+			if (similarityRatio > 70 && similarityRatio > most) {
 				most = similarityRatio;
 				hospital = h;
 				hospital.setSimilar(similarityRatio);
@@ -233,6 +240,7 @@ public class ExcelParser {
 		});
 		return table1s.stream()
 				.filter(t -> StringUtils.isNotBlank(t.getNumberOfOutpatients()))
+				.filter(t -> StringUtils.isNotBlank(t.getMonth()))
 				.filter((t -> t.getMonth().contains(month)))
 				.sorted(Comparator.comparing(t -> Integer.parseInt(t.getOrder())))
 				.collect(Collectors.toList());

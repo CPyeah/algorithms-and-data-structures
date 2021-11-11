@@ -90,7 +90,7 @@ public class QueryAndViewerTest {
 			throws InterruptedException {
 		QueryAndViewer myOptionView = new QueryAndViewer(repository, codes, title, beginTime);
 		myOptionView.view();
-//		Thread.sleep(1000 * 60 * 5);
+		Thread.sleep(1000 * 60 * 5);
 	}
 
 	/**

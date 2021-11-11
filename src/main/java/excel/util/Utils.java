@@ -4,6 +4,10 @@ public class Utils {
 
 	public static float getSimilarityRatio(String str, String target) {
 
+		if (str.equals(target)) {
+			return 100;
+		}
+
 		int d[][]; // 矩阵
 		int n = str.length();
 		int m = target.length();
