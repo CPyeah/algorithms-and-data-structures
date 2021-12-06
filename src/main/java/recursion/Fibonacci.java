@@ -1,4 +1,4 @@
-package basic_concepts;
+package recursion;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ public class Fibonacci {
 	Map<Integer, Integer> cache = new HashMap<>();
 
 	// normal
-	int solution(int n) {
+	public int solution(int n) {
 		count = 0;
 		int r = f(n);
 		System.out.println(count);
@@ -17,7 +17,7 @@ public class Fibonacci {
 	}
 
 	// with cache
-	int solution2(int n) {
+	public int solution2(int n) {
 		count = 0;
 		cache.clear();
 		int r = f2(n);
@@ -49,7 +49,7 @@ public class Fibonacci {
 	}
 
 	// 1  1  2  3  5  8 ...
-	void printFibonacciArray(int l) {
+	public void printFibonacciArray(int l) {
 		int p1 =1,p2=1;
 		for (int i = 1; i < l; i++) {
 			if (i == 1 || i == 2) {

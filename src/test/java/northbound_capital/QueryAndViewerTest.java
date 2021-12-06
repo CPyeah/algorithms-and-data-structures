@@ -9,6 +9,7 @@ import northbound_capital.stocks.MyOptionalStock;
 import northbound_capital.stocks.NewEnergyVehicleStock;
 import northbound_capital.stocks.NewbornBabyStock;
 import northbound_capital.stocks.SemiconductorStock;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import repository.StockDataRepository.StockSum;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationConfiguration.class)
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
+@Ignore
 public class QueryAndViewerTest {
 
 	@Autowired

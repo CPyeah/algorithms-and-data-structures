@@ -1,4 +1,4 @@
-package basic_concepts;
+package linked_list;
 
 import model.ListNode;
 

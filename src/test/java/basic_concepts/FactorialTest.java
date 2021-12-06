@@ -4,6 +4,7 @@ import com.google.common.math.IntMath;
 import java.util.Random;
 import org.junit.Assert;
 import org.junit.Test;
+import recursion.Factorial;
 
 public class FactorialTest {
 

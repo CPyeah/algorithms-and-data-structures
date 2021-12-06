@@ -1,4 +1,4 @@
-package basic_concepts;
+package recursion;
 
 /**
  * 阶乘

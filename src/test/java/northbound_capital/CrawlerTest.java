@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import model.StockData;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import repository.StockDataRepository;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationConfiguration.class)
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
+@Ignore
 public class CrawlerTest {
 
 	@Autowired
@@ -24,7 +26,7 @@ public class CrawlerTest {
 	@Test
 	public void crawling() {
 		Crawler crawler = new Crawler(repository);
-//		crawler.crawling();
+		crawler.crawling();
 	}
 
 	@Test

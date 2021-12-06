@@ -1,9 +1,12 @@
-package basic_concepts;
+package linked_list;
 
 import java.util.HashSet;
 import java.util.Set;
 import model.ListNode;
 
+/**
+ * 判断链表是否成环
+ */
 public class JudgeLinkedListIsCircular {
 
 	/**
@@ -12,20 +15,15 @@ public class JudgeLinkedListIsCircular {
 	 * @return result
 	 */
 	public boolean solution1(ListNode head) {
-		ListNode fast = head;
-		ListNode slow = head;
+		ListNode fastPointer = head;
+		ListNode slowPointer = head;
 		while (true) {
-			if (slow.next != null) {
-				slow = slow.next;
-			} else {
+			if (fastPointer.next == null || fastPointer.next.next == null) {
 				return false;
 			}
-			if (fast.next != null && fast.next.next != null) {
-				fast = fast.next.next;
-			} else {
-				return false;
-			}
-			if (fast == slow) {
+			fastPointer = fastPointer.next.next;
+			slowPointer = slowPointer.next;
+			if (fastPointer.val() == slowPointer.val()) {
 				return true;
 			}
 		}

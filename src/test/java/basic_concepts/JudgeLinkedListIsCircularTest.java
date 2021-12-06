@@ -1,5 +1,6 @@
 package basic_concepts;
 
+import linked_list.JudgeLinkedListIsCircular;
 import model.ListNode;
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package basic_concepts;
+package recursion;
 
 /**
  * You are climbing a staircase. It takes n steps to reach the top.
@@ -7,7 +7,7 @@ package basic_concepts;
  */
 public class ClimbingStairs {
 
-	int solution(int n) {
+	public int solution(int n) {
 		return f(n);
 	}
 

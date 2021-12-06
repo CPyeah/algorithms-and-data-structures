@@ -2,6 +2,7 @@ package basic_concepts;
 
 import org.junit.Assert;
 import org.junit.Test;
+import recursion.ClimbingStairs;
 
 public class ClimbingStairsTest {
 
