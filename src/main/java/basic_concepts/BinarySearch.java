@@ -1,31 +1,72 @@
 package basic_concepts;
 
+/**
+ * 二分查找
+ */
 public class BinarySearch {
 
-	public int solution(int[] array, int target) {
-		if (target < array[0] || target > array[array.length-1]) {
-			return -1;
-		}
-		int leftIndex = 0, rightIndex = array.length -1;
-		while (true) {
-			if (rightIndex - leftIndex <= 1) {
-				return -1;
-			}
-			int midIndex = (leftIndex + rightIndex) / 2;
-			if (target == array[midIndex]) {
-				return midIndex;
-			} else if(target == array[leftIndex]) {
-				return leftIndex;
-			} else if (target == array[rightIndex]) {
-				return rightIndex;
-			} else {
-				if (target > array[midIndex]) {
-					leftIndex = midIndex;
+	/**
+	 * loop
+	 */
+	public static class Solution1 {
+
+		public int binarySearch(int[] arr, int key) {
+			int left = 0;
+			int right = arr.length -1;
+			while (true) {
+				if (key == arr[left]) {
+					return left;
+				} else if (key == arr[right]) {
+					return right;
+				} else if (left >= right) {
+					return -1;
+				}
+				int mid = (left + right) / 2;
+				if (key == arr[mid]) {
+					return mid;
+				} else if (key > arr[mid]) {
+					left = mid;
+					right --;
 				} else {
-					rightIndex = midIndex;
+					right = mid;
+					left++;
 				}
 			}
 		}
+
 	}
 
+	/**
+	 * 递归
+	 */
+	public static class Solution2 {
+
+		public int binarySearch(int[] arr, int key) {
+			return binarySearch(arr, 0, arr.length-1, key);
+		}
+
+		public int binarySearch(int[] arr, int left, int right, int key) {
+			if (key == arr[left]) {
+				return left;
+			} else if (key == arr[right]) {
+				return right;
+			}
+			if (left >= right) {
+				return -1;
+			}
+			int mid = (left + right) / 2;
+			if (key == arr[mid]) {
+				return mid;
+			} else if (key > arr[mid]) {
+				left = mid;
+				right --;
+				return 	binarySearch(arr, left, right, key);
+			} else {
+				right = mid;
+				left++;
+				return 	binarySearch(arr, left, right, key);
+			}
+		}
+
+	}
 }
