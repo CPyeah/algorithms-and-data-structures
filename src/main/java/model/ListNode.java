@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Objects;
-
 /**
  * Normally, both val and next should be private attributes and generate getter and setter for them,
  * but for the convenience of leetcode solutions, I set them as public.
@@ -25,28 +23,23 @@ public class ListNode {
 		return "ListNode{" + "val=" + val + ", next=" + next + '}';
 	}
 
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
 			return true;
 		}
-		if (!(o instanceof ListNode)) {
+		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
 
 		ListNode listNode = (ListNode) o;
 
-		if (val != listNode.val) {
-			return false;
-		}
-		return Objects.equals(next, listNode.next);
+		return val == listNode.val;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = val;
-		result = 31 * result + (next != null ? next.hashCode() : 0);
-		return result;
+		return val;
 	}
-
 }

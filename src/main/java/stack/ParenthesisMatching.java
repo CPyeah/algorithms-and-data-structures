@@ -1,19 +1,14 @@
-package basic_concepts;
+package stack;
 
-import java.util.HashMap;
+import com.google.common.collect.ImmutableMap;
 import java.util.Map;
 import model.MyStack;
 
 public class ParenthesisMatching {
 
 
-	static Map<String, String> parenthesisMap = new HashMap<>();
+	static Map<String, String> parenthesisMap = ImmutableMap.of("(", ")", "[", "]", "{", "}");
 
-	static {
-		parenthesisMap.put("(", ")");
-		parenthesisMap.put("[", "]");
-		parenthesisMap.put("{", "}");
-	}
 
 	public boolean solution(String s) {
 		MyStack<String> stack = new MyStack<>();
