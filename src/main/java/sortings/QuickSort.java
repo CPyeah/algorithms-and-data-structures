@@ -53,8 +53,39 @@ public class QuickSort {
 	public static class Solution2 {
 
 		public int[] quickSort(int[] arr) {
-			return null;
+			sort(arr, 0, arr.length - 1);
+			return arr;
 		}
+
+		public void sort(int[] arr, int beginIndex, int endIndex) {
+			if (beginIndex >= endIndex) {
+				return;
+			}
+			int pivotIndex = partitionSort(arr, beginIndex, endIndex);
+
+			sort(arr, beginIndex, pivotIndex - 1);
+			sort(arr, pivotIndex + 1, endIndex);
+		}
+
+		private int partitionSort(int[] arr, int left, int right) {
+			int storeIndex = left;
+			int pivot = arr[right];
+			for (int i = left; i < right; i++) {
+				if (arr[i] <= pivot) {
+					swap(arr, storeIndex, i);
+					storeIndex++;
+				}
+			}
+			swap(arr, storeIndex, right);
+			return storeIndex;
+		}
+
+		private void swap(int[] array, int l, int r) {
+			int t = array[l];
+			array[l] = array[r];
+			array[r] = t;
+		}
+
 
 	}
 
