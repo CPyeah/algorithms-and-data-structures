@@ -71,7 +71,7 @@ public class CoinChange {
 			int result = Integer.MAX_VALUE;
 			// min{ F[i-coins[1]]+1, F[i-coins[2]]+1, .... F[i-coins[length]]+1 }
 			for (int coin : coins) {
-				int t = i - coin;
+				int t = i - coin;//上一个金额 所对应的结果
 				// 注意边界
 				if (t >= 0 && dp[t] != Integer.MAX_VALUE && dp[t] < result) {
 					result = dp[t] + 1;
