@@ -51,8 +51,6 @@ public class CoinWayToChange {
 
 	/**
 	 * y = f(n) 组成n分的情况总和
-	 * <p>
-	 * f(97) = f(97-25) + f(97-10) + f(97-5) + f(97-1)
 	 */
 	public static class Solution2 {
 
