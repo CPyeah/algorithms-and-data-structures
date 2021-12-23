@@ -94,6 +94,16 @@ public class CommonUtils {
 		return CommonUtils.randomIntArrayGenerator(size, DEFAULT_UPPER_BOUND);
 	}
 
+	public static int[] randomIntArrayGenerator0(int size) {
+		int[] array = new int[size];
+		Random random = new Random();
+		for (int i = 0; i < size; i++) {
+			int randomInt = random.nextInt(DEFAULT_UPPER_BOUND);
+			array[i] = randomInt;
+		}
+		return array;
+	}
+
 	// overloaded method to take no argument
 	public static List<Integer> randomIntArrayGenerator() {
 		return CommonUtils.randomIntArrayGenerator(CommonUtils.DEFAULT_TREE_SIZE,
