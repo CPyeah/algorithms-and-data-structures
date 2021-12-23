@@ -8,9 +8,10 @@ public class NQueens {
 
 	public static class Solution1 {
 
-		public List<List<String>> result = new ArrayList<>();
+		public List<List<String>> result;
 
 		public List<List<String>> solveNQueens(int n) {
+			result = new ArrayList<>();
 			List<Integer[]> resultList = new ArrayList<>();
 			if (n <= 0) {
 				return result;
@@ -22,8 +23,8 @@ public class NQueens {
 		}
 
 		private void search(int n, List<Integer[]> resultList) {
-			Integer[] rows = new Integer[n];
-			searchNextRow(rows, 0, resultList);
+			Integer[] queens = new Integer[n];
+			searchNextRow(queens, 0, resultList);
 		}
 
 		/**
@@ -50,7 +51,7 @@ public class NQueens {
 		}
 
 		private void printQueens(Integer[] queens) {
-			System.out.println(Arrays.toString(queens));
+//			System.out.println(Arrays.toString(queens));
 			ArrayList<String> list = new ArrayList<>(queens.length);
 			for (Integer queen : queens) {
 				StringBuilder sb = new StringBuilder();
@@ -62,7 +63,7 @@ public class NQueens {
 				for (int j = 0; j < queens.length - 1 - queen; j++) {
 					sb.append(".");
 				}
-				System.out.println(sb.toString());
+//				System.out.println(sb);
 				list.add(sb.toString());
 			}
 			result.add(list);
