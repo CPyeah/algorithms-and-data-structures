@@ -73,6 +73,7 @@ public class MaxSubArray {
 		}
 	}
 
+	// dp
 	public static class Solution3 {
 
 		public int maxSubArray(int[] nums) {
