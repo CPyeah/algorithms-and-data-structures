@@ -7,9 +7,6 @@ import model.ListNode;
  */
 public class ReverseLinkedList {
 
-	public static void main(String[] args) {
-		Solution solution = new ReverseLinkedList().new Solution();
-	}
 	//leetcode submit region begin(Prohibit modification and deletion)
 
 	/**
