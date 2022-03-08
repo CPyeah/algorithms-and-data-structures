@@ -28,6 +28,16 @@ public class LinkedListUtils {
 		}
 	}
 
+	public static String toString(ListNode head) {
+		StringBuilder sb = new StringBuilder();
+		ListNode temp = head;
+		while (temp != null) {
+			sb.append(temp.val);
+			temp = temp.next;
+		}
+		return sb.toString();
+	}
+
 	public static ListNode createSinglyLinkedList(List<Integer> listValues) {
 		if (listValues == null || listValues.size() == 0) {
 			throw new IllegalArgumentException(
