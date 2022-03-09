@@ -92,6 +92,7 @@ public class QueryAndViewerTest {
 			throws InterruptedException {
 		QueryAndViewer myOptionView = new QueryAndViewer(repository, codes, title, beginTime);
 		myOptionView.view();
+		System.out.println("code list is " + Arrays.toString(codes.toArray()));
 		Thread.sleep(1000 * 60 * 5);
 	}
 
