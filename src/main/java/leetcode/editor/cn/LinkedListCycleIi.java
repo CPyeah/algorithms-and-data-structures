@@ -7,9 +7,6 @@ import model.ListNode;
  */
 public class LinkedListCycleIi {
 
-	public static void main(String[] args) {
-		Solution solution = new LinkedListCycleIi().new Solution();
-	}
 	//leetcode submit region begin(Prohibit modification and deletion)
 
 	/**
