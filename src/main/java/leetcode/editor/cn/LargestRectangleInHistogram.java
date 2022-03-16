@@ -1,7 +1,6 @@
 package leetcode.editor.cn;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 /**
  * [84] 柱状图中最大的矩形
@@ -16,7 +15,7 @@ public class LargestRectangleInHistogram {
 		public int largestRectangleArea(int[] heights) {
 			int maxArea = 0;
 			// 存的是heights的索引
-			Stack stack = new Stack();
+			Stack<Integer> stack = new Stack<>();
 			stack.push(0);
 
 			// 哨兵处理   前后加 0
@@ -46,26 +45,10 @@ public class LargestRectangleInHistogram {
 			return maxArea;
 		}
 
-		private boolean isSmallThanTop(int[] heights, int i, Stack stack) {
+		private boolean isSmallThanTop(int[] heights, int i, Stack<Integer> stack) {
 			return heights[i] < heights[stack.peek()];
 		}
 
-		class Stack {
-
-			private List<Integer> list = new ArrayList<>();
-
-			public void push(Integer i) {
-				list.add(i);
-			}
-
-			public Integer pop() {
-				return list.remove(list.size() - 1);
-			}
-
-			public Integer peek() {
-				return list.get(list.size() - 1);
-			}
-		}
 	}
 //leetcode submit region end(Prohibit modification and deletion)
 
