@@ -1,5 +1,8 @@
 package leetcode.editor.cn;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * [84] 柱状图中最大的矩形
  */
@@ -9,12 +12,59 @@ public class LargestRectangleInHistogram {
 	//leetcode submit region begin(Prohibit modification and deletion)
 	class Solution {
 
-		// 暴力解
-		// 找每一个条，往左右延伸的最大的矩形
+		// 单调栈
 		public int largestRectangleArea(int[] heights) {
 			int maxArea = 0;
+			// 存的是heights的索引
+			Stack stack = new Stack();
+			stack.push(0);
+
+			// 哨兵处理   前后加 0
+			int[] newHeights = new int[heights.length + 2];
+			newHeights[0] = 0;
+			System.arraycopy(heights, 0, newHeights, 1, heights.length);
+			newHeights[newHeights.length - 1] = 0;
+
+			// 0, 2, 1, 5, 6, 2, 3, 0
+			// 0, 1, 2, 3, 4, 5, 6, 7
+
+			// 0, 2, 1, 2, 0
+			// 0, 1, 2, 3, 4
+			for (int i = 0; i < newHeights.length; i++) {
+
+				while (isSmallThanTop(newHeights, i, stack)) {
+					// 一定要先出栈
+					int high = newHeights[stack.pop()];
+					int width = i - stack.peek() - 1;
+					maxArea = Math.max(maxArea, high * width);
+				}
+
+				stack.push(i);
+
+			}
 
 			return maxArea;
+		}
+
+		private boolean isSmallThanTop(int[] heights, int i, Stack stack) {
+			return heights[i] < heights[stack.peek()];
+		}
+
+		class Stack {
+
+			private List<Integer> list = new ArrayList<>();
+
+			public void push(Integer i) {
+				list.add(i);
+			}
+
+			public Integer pop() {
+				return list.remove(list.size() - 1);
+			}
+
+			public Integer peek() {
+				return list.get(list.size() - 1);
+			}
 		}
 	}
 //leetcode submit region end(Prohibit modification and deletion)
