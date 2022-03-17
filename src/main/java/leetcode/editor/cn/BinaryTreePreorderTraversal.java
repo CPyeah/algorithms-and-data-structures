@@ -2,6 +2,7 @@ package leetcode.editor.cn;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import model.TreeNode;
 
 /**
@@ -21,20 +22,32 @@ public class BinaryTreePreorderTraversal {
 	 */
 	class Solution {
 
+		// 画图理解，注意指针顺序
 		public List<Integer> preorderTraversal(TreeNode root) {
 			List<Integer> result = new ArrayList<>();
-			preorderTraversal(root, result);
+
+			Stack<TreeNode> stack = new Stack<>();
+
+			TreeNode pointer = root;
+
+			while (pointer != null || !stack.isEmpty()) {
+				// 遍历左边
+				while (pointer != null) {
+					result.add(pointer.val);
+					if (pointer.right != null) {
+						stack.add(pointer.right);
+					}
+					pointer = pointer.left;
+				}
+				// 左边遍历完了，指针定位到右边
+				if (!stack.isEmpty()) {
+					pointer = stack.pop();
+				}
+			}
+
 			return result;
 		}
 
-		private void preorderTraversal(TreeNode node, List<Integer> result) {
-			if (node == null) {
-				return;
-			}
-			result.add(node.val);
-			preorderTraversal(node.left, result);
-			preorderTraversal(node.right, result);
-		}
 	}
 //leetcode submit region end(Prohibit modification and deletion)
 
