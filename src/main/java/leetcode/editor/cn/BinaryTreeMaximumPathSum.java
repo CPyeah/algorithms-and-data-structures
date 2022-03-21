@@ -17,27 +17,29 @@ public class BinaryTreeMaximumPathSum {
 	 */
 	class Solution {
 
-		long maxVal = Integer.MIN_VALUE;
+		int maxVal = Integer.MIN_VALUE;
 
 		public int maxPathSum(TreeNode root) {
-			return (int) Math.max(getMax(root), maxVal);
+			getMax(root);
+			return maxVal;
 		}
 
-		private long getMax(TreeNode node) {
+		private int getMax(TreeNode node) {
 			if (node == null) {
-				return Integer.MIN_VALUE;
+				return 0;
 			}
-			long rootVal = node.val;
-			long leftVal = getMax(node.left);
-			long rightVal = getMax(node.right);
-			// 左、 右、 左根右   无法继续向上链接，判断当前最大值
-			maxVal = max(maxVal, leftVal, rightVal, leftVal + rootVal + rightVal);
+			int rootVal = node.val;
+			int leftVal = getMax(node.left);
+			int rightVal = getMax(node.right);
 			// 根、 左根、 右根 可以继续向上链接， 取最大值返回
-			return max(rootVal, leftVal + rootVal, rightVal + rootVal);
+			int retVal = max(rootVal, leftVal + rootVal, rightVal + rootVal);
+			// 左根右   无法继续向上链接，判断当前最大值
+			maxVal = max(maxVal, leftVal + rootVal + rightVal, retVal);
+			return retVal;
 		}
 
-		private long max(long... nums) {
-			return Arrays.stream(nums).max().getAsLong();
+		private int max(int... nums) {
+			return Arrays.stream(nums).max().getAsInt();
 		}
 
 
