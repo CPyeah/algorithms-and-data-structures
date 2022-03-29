@@ -1,6 +1,6 @@
 package leetcode.editor.cn;
 
-import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * [76] 最小覆盖子串
@@ -17,14 +17,17 @@ public class MinimumWindowSubstring {
 			int left = 0, right = 0;
 
 			// 目标字符串 数组形态的Map形式，存储 t 的结构，方便比较
-			int[] targetStringMap = getTargetStringMap(t);
-
+			DiffCharsHolder holder = new DiffCharsHolder(t);
 			// 注意循环停止时机
-			while (right <= s.length()) {
-				if (!isContains(s, left, right, targetStringMap, t.length())) {
+			// "ADOBECODEBANC", "ABC"
+			while (right < s.length()) {
+				if (!holder.isEmpty()) {
 					// 如果 子串不包含， 右指针往右移动
 					right++;
-				} else {
+					char c = s.charAt(right - 1);
+					holder.remove(c);
+				}
+				while (holder.isEmpty()) {
 					// 如果 子串包含
 					// 比较是否最小，记录
 					if (right - left < minLength) {
@@ -33,47 +36,49 @@ public class MinimumWindowSubstring {
 					}
 					// 左指针左移
 					left++;
+					char c = s.charAt(left - 1);
+					holder.add(c);
 				}
 			}
 			return minStartIndex != -1 ? s.substring(minStartIndex, minStartIndex + minLength) : "";
 		}
 
-		private int[] getTargetStringMap(String t) {
-			int[] map = new int[256];
-			for (char c : t.toCharArray()) {
-				map[c]++;
-			}
-			return map;
-		}
 
-		/**
-		 * 是否 sub string 包含 t
-		 *
-		 * @param s                A DOB ECODEBANC
-		 * @param left             1
-		 * @param right            4
-		 * @param targetStringMap  ABC
-		 * @param targetStringSize 3
-		 * @return true/false
-		 */
-		private boolean isContains(String s, int left, int right, int[] targetStringMap,
-				int targetStringSize) {
-			if (left == right) {
-				return false;
-			}
-			int[] targetCopy = Arrays.copyOf(targetStringMap, targetStringMap.length);
-			char[] source = s.toCharArray();
-			for (int i = left; i < right; i++) {
-				char c = source[i];
-				int count = targetCopy[c];
-				if (count > 0) {
-					targetCopy[c]--;
-					targetStringSize--;
+		class DiffCharsHolder {
+
+			// 存储待覆盖字符个数Map
+			private final HashMap<Character, Integer> holder = new HashMap<>();
+
+			// 构造方法， 初始化 待覆盖字符个数
+			DiffCharsHolder(String targetString) {
+				for (char character : targetString.toCharArray()) {
+					Integer count = holder.getOrDefault(character, 0);
+					holder.put(character, ++count);
 				}
 			}
-			return targetStringSize == 0;
-		}
 
+			// 尝试移除一个 覆盖字符
+			void remove(Character character) {
+				Integer count = holder.get(character);
+				if (count != null) {
+					holder.put(character, --count);
+				}
+			}
+
+			// 是否为空，即是否字符已经全部覆盖
+			boolean isEmpty() {
+				return holder.values().stream().noneMatch(c -> c > 0);
+			}
+
+			// 如果是关键字符，添加它
+			void add(Character character) {
+				Integer count = holder.get(character);
+				if (count != null) {
+					holder.put(character, ++count);
+				}
+			}
+
+		}
 
 	}
 //leetcode submit region end(Prohibit modification and deletion)
