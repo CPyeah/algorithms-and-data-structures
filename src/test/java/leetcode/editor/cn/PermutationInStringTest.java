@@ -1,5 +1,6 @@
 package leetcode.editor.cn;
 
+import java.util.List;
 import leetcode.editor.cn.PermutationInString.Solution;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,6 +16,13 @@ public class PermutationInStringTest {
 		Assert.assertFalse(b);
 		b = solution.checkInclusion("a", "ab");
 		Assert.assertTrue(b);
+	}
+
+	@Test
+	public void test1() {
+		Permutations.Solution solution = new Permutations().new Solution();
+		List<List<Integer>> permute = solution.permute(new int[]{1, 2, 3});
+		Assert.assertEquals(6, permute.size());
 	}
 
 }
