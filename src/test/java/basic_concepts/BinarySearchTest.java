@@ -15,6 +15,7 @@ public class BinarySearchTest {
 		solution2 = new BinarySearch.Solution2();
 	}
 
+
 	@Test
 	public void test1() {
 		int[] array = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20};
