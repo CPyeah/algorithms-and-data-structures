@@ -1,4 +1,4 @@
-package sortings;
+package leetcode.editor.cn;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -7,11 +7,12 @@ public class SortUtils {
 
 	public static int[] getRandomArray() {
 		Random random = new Random();
-		int c = 10;
-		int[] array = new int[10];
+		int c = 50;
+		int[] array = new int[c];
 		for (int i = 0; i < c; i++) {
-			array[i] = random.nextInt(15);
+			array[i] = random.nextInt(50);
 		}
+		System.out.println(Arrays.toString(array));
 		return array;
 	}
 
