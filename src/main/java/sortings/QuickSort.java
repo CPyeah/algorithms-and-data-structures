@@ -67,6 +67,8 @@ public class QuickSort {
 			sort(arr, pivotIndex + 1, endIndex);
 		}
 
+		//  2  3  6  1  4
+		//  i           p
 		private int partitionSort(int[] arr, int left, int right) {
 			int storeIndex = left;
 			int pivot = arr[right];

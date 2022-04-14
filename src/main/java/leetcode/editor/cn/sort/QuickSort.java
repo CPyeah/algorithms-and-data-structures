@@ -11,6 +11,50 @@ import java.util.stream.Collectors;
  */
 public class QuickSort {
 
+	// in-place
+	public static class Solution2 {
+
+		public int[] sort(int[] nums) {
+			sort(nums, 0, nums.length - 1);
+			return nums;
+		}
+
+		private void sort(int[] nums, int left, int right) {
+			if (left >= right) {
+				return;
+			}
+			int pivotIndex = pivotDivision(nums, left, right);
+
+			sort(nums, left, pivotIndex - 1);
+			sort(nums, pivotIndex + 1, right);
+		}
+
+		// 按照基准  左右划分
+		// 3  2  6  5  4
+		// 3  2  4  6  5
+		private int pivotDivision(int[] nums, int left, int right) {
+			// 默认给最右边的值 为基准
+			int pivot = nums[right];
+			// 初始化，基准Index
+			int pivotIndex = left;
+			// 把子数组遍历一遍
+			for (int i = left; i < right; i++) {
+				// 如果比 基准小  替换到前面  基准Index++
+				if (nums[i] <= pivot) {
+					SortUtil.swap(nums, i, pivotIndex);
+					pivotIndex++;
+				}
+			}
+			// 最后再把 基准放到中间来
+			SortUtil.swap(nums, right, pivotIndex);
+
+			return pivotIndex;
+		}
+	}
+
+	/**
+	 * 使用List，带辅助空间
+	 */
 	public static class Solution {
 
 		public int[] sort(int[] nums) {
