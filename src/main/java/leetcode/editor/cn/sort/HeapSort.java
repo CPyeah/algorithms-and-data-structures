@@ -8,7 +8,13 @@ package leetcode.editor.cn.sort;
 public class HeapSort {
 
 	/**
-	 * 1. 把数组抽象成二叉树 2. 每个子树做堆化操作，比较根元素和子元素，交换位置，保持根元素最大 3. 循环，保持整棵树的根元素最大 4. 把根元素放到最后
+	 * 1. 把数组抽象成二叉树
+	 * <p>
+	 * 2. 每个子树做堆化操作，比较根元素和子元素，交换位置，保持根元素最大
+	 * <p>
+	 * 3. 循环，保持整棵树的根元素最大
+	 * <p>
+	 * 4. 把根元素放到最后
 	 */
 	public static class Solution {
 
@@ -42,19 +48,6 @@ public class HeapSort {
 		private void checkRootValueBeMax(int[] nums, int rootIndex, int limit) {
 			int leftIndex = rootIndex * 2 + 1;
 			int rightIndex = rootIndex * 2 + 2;
-//			int maxValueIndex = rootIndex;
-//
-//			if (leftIndex < limit && nums[leftIndex] > nums[maxValueIndex]) {
-//				maxValueIndex = leftIndex;
-//			}
-//			if (rightIndex < limit && nums[rightIndex] > nums[maxValueIndex]) {
-//				maxValueIndex = rightIndex;
-//			}
-//			if (maxValueIndex != rootIndex) {
-//				SortUtil.swap(nums, maxValueIndex, rootIndex);
-//				checkRootValueBeMax(nums, maxValueIndex, limit);
-//			}
-
 
 			if (leftIndex < limit && nums[leftIndex] > nums[rootIndex]) {
 				SortUtil.swap(nums, leftIndex, rootIndex);

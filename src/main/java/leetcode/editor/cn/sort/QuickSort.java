@@ -63,15 +63,24 @@ public class QuickSort {
 			return list.stream().mapToInt(i -> i).toArray();
 		}
 
+		// 快速排序递归方法
 		private List<Integer> quickSort(List<Integer> list) {
+			// 递归出口
 			if (list.size() < 2) {
 				return list;
 			}
+			// 随便找一个基准，这里取的是第一个元素
 			Integer pivot = list.get(0);
+
+			// 辅助空间
 			List<Integer> low = new ArrayList<>();
 			List<Integer> high = new ArrayList<>();
 			List<Integer> equal = new ArrayList<>();
+
+			// 结果集合
 			List<Integer> sorted = new ArrayList<>();
+
+			// 大于基准的集合；小于基准的集合；等于基准的集合
 			for (Integer item : list) {
 				if (item.equals(pivot)) {
 					equal.add(item);
@@ -81,8 +90,11 @@ public class QuickSort {
 					high.add(item);
 				}
 			}
+			// 递归
 			low = quickSort(low);
 			high = quickSort(high);
+
+			// 合并
 			sorted.addAll(low);
 			sorted.addAll(equal);
 			sorted.addAll(high);
