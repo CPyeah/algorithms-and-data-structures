@@ -1,5 +1,8 @@
   package leetcode.editor.cn;
-  
+
+  import java.util.List;
+  import model.TreeNode;
+
   /**
    * [652] 寻找重复的子树
    */
@@ -25,7 +28,7 @@
  */
 class Solution {
     public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
-
+        return null;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
