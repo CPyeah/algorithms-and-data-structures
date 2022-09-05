@@ -1,7 +1,7 @@
 package leetcode.editor.cn;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * [416] 分割等和子集
@@ -27,19 +27,21 @@ public class PartitionEqualSubsetSum {
 			target = target / 2;
 
 			// dp  select or not select
-			List<Integer> dp = new ArrayList<>();
+			Set<Integer> dp = new HashSet<>();
 			dp.add(0);
+			Set<Integer> temp = new HashSet<>();
 			for(int n : nums) {
-				int size = dp.size();
-				for (int i = 0; i < size; i++) {
-					int newNumber = n + dp.get(i);
+				for (Integer i : dp) {
+					int newNumber = n + i;
 					if (newNumber == target) {
 						return true;
 					}
 					if (newNumber < target) {
-						dp.add(newNumber);
+						temp.add(newNumber);
 					}
 				}
+				dp.addAll(temp);
+				temp.clear();
 			}
 
 			return false;
