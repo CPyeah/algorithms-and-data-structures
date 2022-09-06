@@ -1,0 +1,23 @@
+func subarraySum(nums []int, k int) int {
+  ans := 0
+  l := len(nums)
+  sum := 0
+  dict := make(map[int]int)
+  dict[0] = 1
+  for i:=0;i<l;i++ {
+     sum += nums[i]
+     diff := sum - k
+     c,ok := dict[diff]
+     if ok {
+      ans += c
+     }
+     dict[sum] ++
+  }
+
+  return ans
+}
+
+
+
+//runtime:48 ms
+//memory:8 MB

@@ -3,10 +3,6 @@
   /**
    * [543] 二叉树的直径
    */
-  public class DiameterOfBinaryTree{
-      public static void main(String[] args) {
-           Solution solution = new DiameterOfBinaryTree().new Solution();
-      }
       //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for a binary tree node.
