@@ -7,61 +7,39 @@
 
       //leetcode submit region begin(Prohibit modification and deletion)
 func removeInvalidParentheses(s string) []string {
-  ans = make([]string, 0)
-  if isValid(s) {
-    ans = append(ans, s)
-    return ans
-  }
-  dfs(s, -1)
-  // remove all '@' and get the max length
-  maxLen := 0
-  m := make(map[string]bool)
-  for i:=0;i<len(ans);i++ {
-    ans[i] = remove(ans[i])
-    m[ans[i]] = true
-    if len(ans[i]) > maxLen {
-      maxLen = len(ans[i])
+  queue := make([]string, 0)
+  queue = append(queue, s)
+  ans := make(map[string]bool)
+  visited := make(map[string]bool)
+  matchedLen := 0
+  for len(queue) > 0 {
+    t := queue[0]
+    queue = queue[1:]
+    if visited[t] == true {
+      continue
+    } else {
+      visited[t] = true
+    }
+    if (len(t) < matchedLen) {
+      continue
+    }
+    if isValid(t) {
+      ans[t] = true
+      matchedLen = len(t)
+    } else {
+      for i:=0;i<len(t);i++ {
+        if t[i] == '(' || t[i] == ')' {
+          sub := t[:i] + t[i+1:]
+          queue = append(queue, sub)
+        }
+      }
     }
   }
-  // get the true ans
-  trueAns := make([]string, 0)
-  for k,_ := range m {
-    if len(k) == maxLen {
-      trueAns = append(trueAns, k)
-    }
+  result := make([]string, 0)
+  for k,_ := range ans {
+    result = append(result, k)
   }
-
-  return trueAns
-}
-
-func remove(s string) string{
-  b := make([]byte, 0)
-  for i := range s {
-    if s[i] != '@' {
-      b = append(b, s[i])
-    }
-  }
-  return string(b)
-}
-
-var ans []string
-
-func dfs(s string, i int) {
-  i++
-  if i >= len(s) {
-    return
-  }
-  dfs(s, i)
-  if s[i] != '(' && s[i] != ')' {
-    return
-  }
-  buf := []rune(s)
-  buf[i] = '@'
-  s = string(buf)
-  if isValid(s) {
-    ans = append(ans, s)
-  }
-  dfs(s, i)
+  return result
 }
 
 func isValid(s string) bool {
