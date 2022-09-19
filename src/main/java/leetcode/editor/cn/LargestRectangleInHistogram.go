@@ -10,11 +10,12 @@
       //leetcode submit region begin(Prohibit modification and deletion)
 func largestRectangleArea(heights []int) int {
   heights = append(heights, 0)
-  heights = append([]int{0}, heights...)
+//   heights = append([]int{0}, heights...)
   stack := make([]int, 0)
+  stack = append(stack, -1)
   maxArea := 0
   for i:=0;i<len(heights);i++ {
-    for len(stack) > 0 && heights[i] < heights[stack[len(stack)-1]] {
+    for len(stack) > 1 && heights[i] < heights[stack[len(stack)-1]] {
       // pop
       topIndex := stack[len(stack)-1]
       stack = stack[:len(stack)-1]
