@@ -17,7 +17,20 @@
  * }
  */
 func maxDepth(root *TreeNode) int {
-
+  ans := 0
+  var dfs func(node *TreeNode, c int)
+  dfs = func(node *TreeNode, c int) {
+    if node == nil {
+      return
+    }
+    if c > ans {
+      ans = c
+    }
+    dfs(node.Left, c + 1)
+    dfs(node.Right, c+1)
+  }
+  dfs(root, 1)
+  return ans
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
