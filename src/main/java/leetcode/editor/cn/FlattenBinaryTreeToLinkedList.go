@@ -17,7 +17,22 @@
  * }
  */
 func flatten(root *TreeNode)  {
-
+  if root == nil {
+    return
+  }
+  if root.Left != nil {
+    rightSub := root.Right
+    // find rightest in leftSubTree
+    rightest := root.Left
+    for rightest.Right != nil {
+      rightest = rightest.Right
+    }
+    // insert left into right
+    root.Right = root.Left
+    root.Left = nil
+    rightest.Right = rightSub
+  }
+  flatten(root.Right)
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
