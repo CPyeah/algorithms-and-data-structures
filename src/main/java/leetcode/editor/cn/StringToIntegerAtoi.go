@@ -20,7 +20,8 @@
       const isNumber = "isNumber"
       const isPoint = "isPoint"
 func myAtoi(s string) int {
-	// "  xx  -4193 with words" -> -4193
+	// "  -4193 with words" -> -4193
+	s = strings.Trim(s, " ")
 	var ans = 0
 	negative := false
 	floatFlag := 1
@@ -43,6 +44,12 @@ func myAtoi(s string) int {
 		if negative {
 			ans = -ans
 		}
+		if ans < math.MinInt64 || ans < math.MinInt32 {
+		  ans = math.MinInt32
+		}
+		if ans > math.MaxInt64 || ans > math.MaxInt32 {
+		  ans = math.MaxInt32
+		}
 	}
 
 	status := other
@@ -51,7 +58,7 @@ func myAtoi(s string) int {
 		event := getEvent(b)
 		if status == other {
 			if event == isOther {
-				continue
+			  return 0
 			} else if event == isSign {
 				recordSign(b)
 				status = sign
@@ -71,10 +78,14 @@ func myAtoi(s string) int {
 		} else if status == integer {
 			if event == isNumber {
 				getInteger(b)
+        if ans > math.MaxInt32 {
+          finish()
+          return ans
+        }
 				status = integer
 			} else if event == isPoint {
 				status = float
-			} else if event == isOther {
+			} else if event == isOther || event == isSign{
 				break
 			} else {
 				return 0
