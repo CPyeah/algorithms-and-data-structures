@@ -9,19 +9,36 @@
       }
       //leetcode submit region begin(Prohibit modification and deletion)
 func myPow(x float64, n int) float64 {
-  ans := 1.0
-  if n > 0 {
-    for i:=0;i<n;i++ {
-      ans *= x
-    }
-  }
+  negative := false
   if n < 0 {
     n = -n
-    for i:=0;i<n;i++ {
-      ans /= x
-    }
+    negative = true
+  }
+
+  ans := pow(x, n)
+
+  if negative {
+    ans = 1 / ans
   }
   return ans
+}
+
+func pow(x float64, n int) float64 {
+  if n == 0 {
+    return 1
+  }
+  if n == 1 {
+    return x
+  }
+  if x == 0 {
+    return 0
+  }
+  half := n / 2
+  if n % 2 == 0 {
+    return pow(x*x, half)
+  } else {
+    return pow(x*x, half) * x
+  }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
