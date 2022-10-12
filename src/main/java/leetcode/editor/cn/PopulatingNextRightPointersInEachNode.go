@@ -19,7 +19,20 @@
  */
 
 func connect(root *Node) *Node {
-	
+  var dfs func(root *Node)
+	dfs = func(root *Node) {
+	  if root == nil || root.Left == nil {
+	    return
+	  }
+	  root.Left.Next = root.Right
+	  if root.Next != nil { // if current is (2)
+      root.Right.Next = root.Next.Left
+	  }
+	  dfs(root.Left)
+	  dfs(root.Right)
+	}
+	dfs(root)
+	return root
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
