@@ -9,7 +9,12 @@
       }
       //leetcode submit region begin(Prohibit modification and deletion)
 func trailingZeroes(n int) int {
-
+  res := 0
+  for n > 0 {
+    n /= 5
+    res += n
+  }
+  return res
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
