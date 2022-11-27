@@ -2,6 +2,8 @@
   
   /**
    * [237] 删除链表中的节点
+   * 
+   * 2 (1:Easy; 2:Medium; 3:Hard)
    */
   public class DeleteNodeInALinkedList{
       public static void main(String[] args) {
@@ -16,7 +18,8 @@
  * }
  */
 func deleteNode(node *ListNode) {
-    
+    node.Val = node.Next.Val
+   node.Next = node.Next.Next
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
